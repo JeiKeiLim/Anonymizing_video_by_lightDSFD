@@ -26,7 +26,7 @@ parser = argparse.ArgumentParser(description='Single Shot MultiBox Detection')
 parser.add_argument('--trained_model', default='weights/light_DSFD.pth',
                     type=str, help='Trained state_dict file path to open')
 
-parser.add_argument('--save_folder', default='eval_tools/light_DSFD/', type=str,
+parser.add_argument('--save_folder', default='result/', type=str,
                     help='Dir to save results')
 parser.add_argument('--visual_threshold', default=0.01, type=float,
                     help='Final confidence threshold')
@@ -149,7 +149,7 @@ def vis_detections(im,  dets, image_name , thresh=0.5):
                   fontsize=10)
     plt.axis('off')
     plt.tight_layout()
-    plt.savefig('./data/'+image_name, dpi=fig.dpi)
+    plt.savefig(args.save_folder + image_name, dpi=fig.dpi)
 
 
 def light_test_oneimage():

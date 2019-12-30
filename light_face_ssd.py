@@ -98,13 +98,14 @@ class CRelu(nn.Module):
 
 class SSD(nn.Module):
 
-    def __init__(self, phase, size, num_classes):
+    def __init__(self, phase, size, num_classes, verbose=0):
         super(SSD, self).__init__()
         self.phase = phase
         self.num_classes = num_classes
         assert(num_classes == 2)
         self.cfg = cfg
         self.size = size
+        self.verbose = verbose
         
         if backbone in ['facebox']:
 
@@ -364,7 +365,7 @@ class SSD(nn.Module):
             if refine:
                 output = output + tuple((arm_loc.view(arm_loc.size(0), -1, 4), arm_conf.view(arm_conf.size(0), -1, self.num_classes) ))
 
-        if self.phase == "test":
+        if self.phase == "test" and self.verbose > 0:
           print( 'Backbone: %.4f , FPN: %.4f, CPM: %.4f, Head: %.4f, PA: %.4f, Decode_NMS: %.4f' % (t1-t0 , t2-t1, t3-t2, t4-t3, t5-t4, t6-t5))
         return output
 
