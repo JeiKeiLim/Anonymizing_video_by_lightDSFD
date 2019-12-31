@@ -169,7 +169,7 @@ if __name__ == '__main__':
         if args.reduce_scale == 1:
             resized_img = frame
         else:
-            resized_img = cv2.resize(frame, None, None, fx=args.reduce_scale, fy=args.reduce_scale)
+            resized_img = cv2.resize(frame, (int(frame.shape[1] // args.reduce_scale), int(frame.shape[0] // args.reduce_scale)))
 
         det = infer(net, resized_img, transform, thresh, cuda, shrink)
         blur_faces(resized_img, det, args.threshold)
