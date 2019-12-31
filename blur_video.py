@@ -1,4 +1,4 @@
-from __future__ import print_function 
+from __future__ import print_function
 import sys
 import os
 import argparse
@@ -37,6 +37,8 @@ parser.add_argument('--verbose', type=int, default=0,
                     help='Show current progress and remaining time')
 parser.add_argument('--reduce_scale', type=float, default=2,
                     help='Reduce scale ratio. ex) 2 = half size of the input. Default : 2')
+parser.add_argument('--rotate', type=int, default=0,
+                    help="Detect faces with rotation. 0 : No rotation, 1 : 90°, 2: 90°, 270°, 3 : 90°, 180°, 270°. Default : 0")
 
 parser.add_argument('--trained_model', default='weights/light_DSFD.pth',
                     type=str, help='Trained state_dict file path to open')
@@ -73,7 +75,7 @@ def infer(net , img , transform , thresh , cuda , shrink):
             score = detections[0, i, j, 0]
             #label_name = labelmap[i-1]
             pt = (detections[0, i, j, 1:]*scale).cpu().numpy()
-            coords = (pt[0], pt[1], pt[2], pt[3]) 
+            coords = (pt[0], pt[1], pt[2], pt[3])
             det.append([pt[0], pt[1], pt[2], pt[3], score])
             j += 1
     if (len(det)) == 0:
@@ -171,6 +173,23 @@ if __name__ == '__main__':
 
         det = infer(net, resized_img, transform, thresh, cuda, shrink)
         blur_faces(resized_img, det, args.threshold)
+
+        if args.rotate > 0:
+            resized_img = cv2.rotate(resized_img, cv2.ROTATE_90_CLOCKWISE)
+            det = infer(net, resized_img, transform, thresh, cuda, shrink)
+            blur_faces(resized_img, det, args.threshold)
+
+            resized_img = cv2.rotate(resized_img, cv2.ROTATE_90_CLOCKWISE)
+            if args.rotate > 2:
+                det = infer(net, resized_img, transform, thresh, cuda, shrink)
+                blur_faces(resized_img, det, args.threshold)
+
+            resized_img = cv2.rotate(resized_img, cv2.ROTATE_90_CLOCKWISE)
+            if args.rotate > 1:
+                det = infer(net, resized_img, transform, thresh, cuda, shrink)
+                blur_faces(resized_img, det, args.threshold)
+
+            resized_img = cv2.rotate(resized_img, cv2.ROTATE_90_CLOCKWISE)
 
         out.write(resized_img)
 
