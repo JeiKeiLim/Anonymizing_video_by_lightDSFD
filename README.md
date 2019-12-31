@@ -5,11 +5,11 @@ Modified by [Jongkuk Lim](http://limjk.com?refer=github_lightDSFD)
 
 ## History
 
-This repository was forked from [lightDSFD](https://github.com/JeiKeiLim/lightDSFD)
+This repository was forked from [lightDSFD](https://github.com/lijiannuist/lightDSFD)
 
 ## Introduction
 Simple implementation of video anonymization.
-If you are looking for a more accurate version, check [Anonymizing videos by DSFD](https://github.com/JeiKeiLim/FaceDetection-DSFD). 
+If you are looking for a more accurate version, check [Anonymizing videos by DSFD](https://github.com/JeiKeiLim/Anonymizing_video_by_DSFD). 
 And, if you are looking for a simpler example, [noone video](https://github.com/JeiKeiLim/noone_video) is implemented by only OpenCV examples.
 
 ## Comparisons
