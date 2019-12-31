@@ -1,11 +1,10 @@
 # Anonymizing videos by lightDSFD
-By [Jian Li](https://lijiannuist.github.io/)
-
 Modified by [Jongkuk Lim](http://limjk.com?refer=github_lightDSFD)
 
 ## History
 
-This repository was forked from [lightDSFD](https://github.com/lijiannuist/lightDSFD)
+This repository was forked from [lightDSFD](https://github.com/lijiannuist/lightDSFD) by [Jian Li](https://lijiannuist.github.io/)
+
 
 ## Introduction
 Simple implementation of video anonymization.
